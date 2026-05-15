@@ -381,6 +381,9 @@ if __name__ == "__main__":
                 model = gr.Dropdown(
                     [
                         "gemma4:latest",
+                        "gemma3:270m",
+                        "smollm2:360m",
+                        "smollm2:135m",
                         "qwen3.6:latest",
                         "codellama:7b-instruct",
                         "qwen3.5:0.8b",
@@ -429,70 +432,3 @@ if __name__ == "__main__":
 
     # Launch the app
     demo.launch()
-
-
-
-
-    '''
-    # create database
-    if(True):
-        # check if data folder exists
-        data_path = Path(DATA_DIR)
-        if data_path.exists():
-            print("Data folder named 'data' was found.")
-        else:
-            raise ValueError(f"Data folder, named: 'data' was not found!")
-
-        # check if idx folder exists
-        idx_path = Path(IDX_DIR)
-        try:
-            os.makedirs(idx_path)
-        except FileExistsError:
-            print("Scanning existing idx folder:")
-
-        # scan folder for index in pairs, if there is no index we re-generate it
-        subdirs = get_subdirectory_paths(DATA_DIR)
-        for subdir in subdirs:
-            # check index for folder name
-            idx_file_name = Path(subdir).name
-            idx_file_with_extension = idx_file_name + ".index"
-            idx_file_path = (Path(IDX_DIR).joinpath(idx_file_with_extension))
-
-            if idx_file_path.exists():
-                print("Skip generating index file. ( For re-generation please delete .index and .npy files!")
-            else:
-                print("Generating missing index file...")
-
-                # get chunks from subdirectory MD files
-                chunks = build_chunks(subdir)
-                # create FAISS embeddings from chunks
-                create_embeddings(IDX_DIR, chunks, idx_file_name)
-                '''
-
-    '''
-    # prepare for query
-    if(True):
-        index, data, id_to_topic = load_search_topics()
-        #query = "Is LangChain aims to make switching across vendors seamless, for some complex workflows?"
-        query = "Please describe feature extraction and description using DoG and SIFT"
-        relevant_topics = get_relevant_topics(index, id_to_topic, query, TOP_K)
-        context = []
-        sources = []
-        for topic in relevant_topics:
-            index_name = str(topic + ".index")
-            chunks_name = str(topic + ".npy")
-            index_path = str(Path(IDX_DIR).joinpath(index_name))
-            chunk_path = str(Path(IDX_DIR).joinpath(chunks_name))
-            # TODO CACHE IN ALL CHUNKS FOR SPEED
-            # load relevant chunks
-            index = faiss.read_index(index_path)
-            chunks = np.load(chunk_path, allow_pickle=True)
-            topic_context, topic_sources = query_topics(index, chunks, query, TOP_K)
-            context.append(topic_context)
-            sources.append(topic_sources)
-
-        #print("context:", context, "\nsources:", sources)
-        print(query_llm(context, query), "\nsources:", sources)
-        '''
-
-
