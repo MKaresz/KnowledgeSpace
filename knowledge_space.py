@@ -105,8 +105,8 @@ def build_chunks(path: str):
     print(f"Number of documents in folder: {len(docs)} in {path}")
 
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=256,
-        chunk_overlap=50
+        chunk_size=400,
+        chunk_overlap=80
     )
 
     chunks = []
@@ -429,24 +429,13 @@ if __name__ == "__main__":
                 only_source = gr.Checkbox(value=True, label="Use only source")
                 top_k = gr.Slider(minimum=1, maximum=10, value=3, step=1, label="Search depth (1-10)")
                 temperature = gr.Slider(minimum=0.0, maximum=1.0, value=0.1, label="Imagination temperature")
-                answer_length = gr.Slider(minimum=100, maximum=1000, step=100, value=400, label="Answer length")
+                answer_length = gr.Slider(minimum=100, maximum=1000, step=100, value=600, label="Answer length")
                 model = gr.Dropdown(
                     [
-                        "gemma4:latest",
-                        "gemma3:270m",
-                        "smollm2:360m",
-                        "smollm2:135m",
-                        "qwen3.6:latest",
-                        "codellama:7b-instruct",
-                        "qwen3.5:0.8b",
-                        "deepseek-coder:6.7b",
+                        "gemma4:12b",
                         "qwen2.5-coder:14b",
-                        "phi4-mini:latest",
-                        "Llama3.2:1b",
-                        "reaperdoesntrun/Qwen3-0.6B-Distilled:latest",
-                        "deepseek-r1:7b",
-                        "llama3.1:latest",
-                        "qwen2.5-coder:7b"
+                        "mistral:7b",
+                        "hermes3:8b",
                     ], label="Model", info="Choose LLM Model"
                 )
                 # Train database
