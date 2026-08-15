@@ -433,9 +433,12 @@ if __name__ == "__main__":
                 model = gr.Dropdown(
                     [
                         "gemma4:12b",
-                        "qwen2.5-coder:14b",
-                        "mistral:7b",
+                        "phi4-mini:3.8b",
+                        "llama3.1:8b",
                         "hermes3:8b",
+                        "mistral:7b",
+                        "qwen2.5-coder:7b",
+                        "qwen2.5-coder:14b"
                     ], label="Model", info="Choose LLM Model"
                 )
                 # Train database

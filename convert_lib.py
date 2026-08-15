@@ -148,7 +148,7 @@ def scan_folder_for_epub(current_dir):
 
 
 if __name__ == "__main__":
-    subdirs = get_subdirectory_paths("C:\\Users\\tiega\\OneDrive\\Desktop\\KnowledgeSpace")
+    subdirs = get_subdirectory_paths("E:\\KnowledgeSpace\\data")
     for subdir in subdirs:
         print(subdir)
         scan_folder_for_pdf(Path(subdir))
